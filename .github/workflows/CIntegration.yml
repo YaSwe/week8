@@ -27,12 +27,12 @@ jobs:
       with:
         repository: YaSwe/hiddenWeek8
         token: ${{ secrets.WEEK8 }}
-        path: hiddenCode
+        path: hiddenWeek8
 
     - name: List Current Files
       run: |
         ls
-        sudo mv ./hiddenCode/*.* ./
+        sudo mv ./hiddenWeek8/*.* ./
 
     - name: Test Command
       if: always()
