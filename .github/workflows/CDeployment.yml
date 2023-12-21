@@ -1,0 +1,79 @@
+name: Simple Deployment
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Test for Deployment
+    runs-on: Ubuntu-latest
+    steps:
+    - name: Setup Python Environment
+    - uses: actions/checkout@v4
+    - uses: acions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Plugin
+      run: |
+        pip install pytest pytest-cov
+        
+    - name: Checkout Development Code
+      uses: actions/checkout@v4
+      with:
+        repository: YaSwe/week8
+
+    - name: Checkout Private Repo
+      uses: actions/checkout@v4
+      with:
+        repository: YaSwe/hiddenWeek8
+        token: ${{ secrets.WEEK8 }}
+        path: hiddenCode
+
+    - name: List Current Files
+      run: |
+        ls
+        sudo mv ./hiddenCode/*.* ./
+
+    - name: Test Command
+      if: always()
+      run: |
+        pytest -v -cov --junitxml=report.xml
+
+    - if: ${{ failure() }}
+      name: Create Issue on Failed Workflow
+      uses: dacbd/create-issue-action@main
+      with:
+        token: ${{ github.token }}
+        title: Action workflow failed.
+        body: |
+          ### Context
+          [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
+          Workflow name - `${{ github.workflow }}`
+          Job -           `${{ github.job }}`
+          status -        `${{ job.status }}`
+          assignees: YaSwe
+
+    - name: Publish Test Results
+      uses: EnricoMi/Publish-unit-test-result-action/composite@v2
+      if: always()
+      with:
+        junit_files: "report.xml"
+
+  Deploy_To_Git_Release:
+    needs: build
+    name: Release to Git for Deployment
+    runs-on: Ubuntu-latest
+    steps:
+    - name: Set Environment Version
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    - name: Create a Release
+      id: create-new-release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.RELEASE_VERSION }}
+        release_name: Release ${{ env.RELEASE_VERSION }}
