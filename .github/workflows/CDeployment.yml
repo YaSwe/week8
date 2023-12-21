@@ -69,7 +69,8 @@ jobs:
     steps:
     - name: Set Environment Version
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-    - name: Create a Release
+      
+    - name: Create GitHub Release
       id: create-new-release
       uses: actions/create-release@v1
       env:
@@ -77,3 +78,7 @@ jobs:
       with:
         tag_name: ${{ env.RELEASE_VERSION }}
         release_name: Release ${{ env.RELEASE_VERSION }}
+    - name: Archive Site Content
+      uses: thedoctor0/zip-release@master
+      with: 
+        filename: content.zip
