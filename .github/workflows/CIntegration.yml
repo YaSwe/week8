@@ -8,18 +8,29 @@ jobs:
     name: Build and Test for Integration
     runs-on: Ubuntu-latest
     steps:
-    - name: Setup Python Environement
+    - name: Setup Python environment
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10' 
-    - name: install plugin
+        
+    - name: Install plugin
       run : |
         pip install pytest pytest-cov
-    - name: checkout development code
+        
+    - name: Checkout development code
     - uses: actions/checkout@v4
       with: 
         repository: YaSwe/week8
+        token: ${{ secrets.WEEK8 }}
+        path: hiddenCode
+
+    - name: List current files
+      run: |
+        ls
+        sudo mv ./hiddenCode/*.* ./
+
+    
       
     
   
