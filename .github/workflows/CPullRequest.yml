@@ -82,7 +82,7 @@ jobs:
     runs-on: Ubuntu-latest
     steps:
     - name: Add Reviewers
-      uses: madrapps/add-reviwers@v1
+      uses: madrapps/add-reviewers@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         reviewers: YaSwe
