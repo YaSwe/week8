@@ -37,7 +37,7 @@ jobs:
     - name: Test Command
       if: always()
       run: |
-        pytest -v -cov --junitxml=report.xml
+        pytest -v -cov --junitxml=report.xml hiddenCode/test.py
 
     - if: ${{ failure() }}
       name: Create Issue on Failed workflow
