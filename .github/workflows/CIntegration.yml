@@ -8,7 +8,6 @@ jobs:
     name: Build and Test for Integration
     runs-on: Ubuntu-latest
     steps:
-    - name: Setup Python Environment
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
       with:
