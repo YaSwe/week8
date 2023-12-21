@@ -78,6 +78,7 @@ jobs:
         name: testResults
 
   Requests_AddReviewer:
+    name: Add Reviewers
     needs: Requests_Build
     runs-on: Ubuntu-latest
     steps:
