@@ -32,7 +32,7 @@ jobs:
     - name: List Current Files
       run: |
         ls
-        sudo mv ./hiddenCode/*.* ./
+        sudo mv ./hiddenCode/* ./
 
     - name: Test Command
       if: always()
