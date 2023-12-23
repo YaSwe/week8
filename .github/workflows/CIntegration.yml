@@ -34,7 +34,6 @@ jobs:
       run: |
         ls
         sudo mv ./hiddenCode/*.* ./
-        ls hiddenCode
         
     - name: Connect to MySQL and set up database
       run: |
