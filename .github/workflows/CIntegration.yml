@@ -16,6 +16,7 @@ jobs:
     - name: Install Plugin
       run: |
         pip install pytest pytest-cov
+        pip install mysql-connector-python
         
     - name: Checkout Development Code
       uses: actions/checkout@v4
@@ -33,6 +34,10 @@ jobs:
       run: |
         ls
         sudo mv ./hiddenCode/*.* ./
+
+    - name: Connect to MySQL and set up database
+      run: |
+        python hiddenCode/setup_test_db.py
 
     - name: Test Command
       if: always()
