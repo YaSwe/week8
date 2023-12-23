@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} <title>Login</title>{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="title">TSAO Capstone Records System</div>
+</div>
+<main class="content">
+    <form action="/login" method="POST">
+        <h2>Sign In</h2>
+        <!-- Username Input -->
+        <div class="input-selection">
+            <input type="text" name="username" id="username" placeholder=" " required>
+            <div class="label">
+                <label for="username">Username</label>
+            </div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-selection">
+            <input type="password" name="password" id="password" placeholder=" " required>
+            <div class="label">
+                <label for="password">Password</label>
+            </div>
+        </div>
+
+        <div class="btns-group">
+            <input type="submit" class="btn loginBtn" value="Login">
+            <a class="btn cancelBtn" href="/">Cancel</a>
+        </div>
+        {% if error=='Invalid Credentials' %}
+        <div class="error-text loginError hide">Invalid login credentials. Please try again.</div>
+        {% endif %}
+        <div class="signUpLink">Don't have an account?<a class="underline-link" href="/register">Click here</a></div>
+    </form>
+</main>
+{% endblock %}

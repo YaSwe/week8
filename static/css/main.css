@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+:root {
+    font-size: calc(0.625rem + 0.4vw);
+    --montserrat-font: 'Montserrat', sans-serif;
+    --white: #ffffff;
+    --light-grey: #F7F7F7;
+    --dark-grey: #757575;
+    --cyan: #19A7CE;
+    --light-blue: #AFD3E2;
+    --dark-blue: #146C94;
+    --red: #ef4444;
+    --light-red: #E67B7B;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-family: var(--montserrat-font);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    background: linear-gradient(90deg, var(--dark-blue) 0%, var(--cyan) 100%);
+    color: var(--white);
+    z-index: 3;
+}
+
+/* Content */
+
+.content {
+    display: grid;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Login & Registration form */
+
+form {
+    background: var(--light-grey);
+    padding: 2.5rem;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+form h2 {
+    margin-bottom: 4rem;
+    font-size: 20px;
+    color: var(--cyan)
+}
+
+.input-selection {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+    width: 300px;
+}
+
+input {
+    padding: 5px 0;
+    border: none;
+    border-bottom: 1px solid var(--dark-grey);
+    transition: .3s ease;
+    font-size: 14px;
+    color: var(--dark-grey);
+    background: var(--light-grey);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--light-blue);
+    box-shadow: 0 1px 0 0 var(--dark-blue);
+}
+
+.label {
+    position: absolute;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    transition: .3s ease;
+}
+
+label {
+    color: var(--dark-grey);
+    font-size: 14px;
+}
+
+input:focus + .label,
+input:not(:placeholder-shown) + .label {
+    transform: translateY(-27px);
+}
+
+input:focus + .label label,
+input:not(:placeholder-shown) + .label label {
+    font-weight: 600;
+    color: black;
+}
+
+.signUpLink, .loginLink {
+    font-size: 14px;
+    margin-top: 2rem;
+}
+
+.underline-link {
+    text-decoration: underline;
+    color: var(--dark-blue);
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.underline-link:hover {
+    color: var(--light-blue);
+}
+
+.error-text {
+    color: var(--light-red);
+    font-size: 14px;
+}
+
+.inputError {
+    margin-top: 5px;
+}
+
+.loginError {
+    font-weight: 600;
+    margin-top: 3rem;
+}
+
+
+/* Buttons */
+
+.btn {
+    padding: 10px 15px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: .3s;
+    background-color: var(--light-blue);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background-color: var(--dark-blue);
+}
+
+.cancelBtn {
+    background-color: var(--light-red);
+}
+
+.cancelBtn:hover {
+    background-color: var(--red);
+}
+
+/* Misc */
+
+.hide {
+    display: none;
+}
