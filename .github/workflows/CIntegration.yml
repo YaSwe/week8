@@ -34,6 +34,13 @@ jobs:
       run: |
         ls
         sudo mv ./hiddenCode/*.* ./
+
+    - name: Check Database Credentials
+      run: |
+        echo "DB_HOST: ${{ secrets.DB_HOST }}"
+        echo "DB_USER: ${{ secrets.DB_USER }}"
+        echo "DB_PASSWORD: ${{ secrets.DB_PASSWORD }}"
+        echo "DB_DATABASE: ${{ secrets.DB_DATABASE }}"
         
     - name: Connect to MySQL and set up database
       run: |
