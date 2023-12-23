@@ -16,6 +16,7 @@ jobs:
     - name: Install Plugin
       run: |
         pip install pytest pytest-cov
+        pip install flask
         
     - name: Checkout Development Code
       uses: actions/checkout@v4
@@ -37,6 +38,7 @@ jobs:
     - name: Test Command
       if: always()
       run: |
+        source venv/bin/activate
         pytest -v -cov --junitxml=report.xml 
 
     - if: ${{ failure() }}
