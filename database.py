@@ -1,6 +1,8 @@
 import json
+import os
 import mysql.connector
 from mysql.connector import Error
+from dotenv import load_dotenv
 
 def create_server_connection(host_name, user_name, user_password, db_name):
     connection = None
@@ -17,13 +19,13 @@ def create_server_connection(host_name, user_name, user_password, db_name):
     
     return connection
 
-def get_database_connection():
-    with open('config.json') as config_file:
-        config = json.load(config_file)
+load_dotenv()
 
-    db_host = config['DB_HOST']
-    db_user = config['DB_USER']
-    db_password = config['DB_PASSWORD']
-    db_name = config['DB_DATABASE']
+def get_database_connection():
+    db_host = os.getenv('DB_HOST')
+    db_user = os.getenv('DB_USER')
+    db_password = os.getenv('DB_PASSWORD')
+    db_name = os.getenv('DB_DATABASE')
 
     return create_server_connection(db_host, db_user, db_password, db_name)
+
