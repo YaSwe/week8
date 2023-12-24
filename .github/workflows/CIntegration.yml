@@ -45,7 +45,7 @@ jobs:
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         DB_DATABASE: ${{ secrets.DB_DATABASE }}
       run: |
-        DB_HOST=$DB_HOST DB_USER=$DB_USER DB_PASSWORD=$DB_PASSWORD DB_DATABASE=$DB_DATABASE pytest -v -cov --junitxml=report.xml
+        pytest -v -cov --junitxml=report.xml
 
     - if: ${{ failure() }}
       name: Create Issue on Failed workflow
