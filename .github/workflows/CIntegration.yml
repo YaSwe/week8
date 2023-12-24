@@ -38,8 +38,8 @@ jobs:
     - name: Set up MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
-        host port: 3800
-        container port: 3307
+        host port: 3306
+        container port: 3306
         character set server: 'utf8'
         collation server: 'utf8_general_ci'
         mysql version: '8.0'
@@ -50,7 +50,7 @@ jobs:
 
     - name: Run SQL Scripts
       run: |
-        mysql -h ${{ secrets.DB_HOST }} -u ${{ secrets.DB_USER }} -p"${{ secrets.DB_PASSWORD }}" ${{ secrets.DB_DATABASE }} < create_test_db.sql
+        mysql -h ${{ secrets.DB_HOST }} -P 3306 -u ${{ secrets.DB_USER }} -p"${{ secrets.DB_PASSWORD }}" ${{ secrets.DB_DATABASE }} < create_test_db.sql
         
     - name: Test Command
       if: always()
