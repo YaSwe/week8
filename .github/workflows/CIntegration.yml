@@ -47,7 +47,7 @@ jobs:
     - name: Test Command
       if: always()
       run: |
-        mysql -h 127.0.0.1 -u root -p'testrootpass' testdb < create_test_db.sql
+        mysql -h 127.0.0.1 -P 3307 -u root -p'testrootpass' testdb < create_test_db.sql
         pytest -v -cov --junitxml=report.xml
 
     - if: ${{ failure() }}
