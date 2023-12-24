@@ -49,7 +49,7 @@ jobs:
     - name: Test Command
       if: always()
       run: |
-        mysql --protocol=tcp -h localhost --port 33306 -uroot -ppassword < create_test_db.sql
+        mysql --protocol=tcp -h 127.0.0.1 --port 33306 -uroot -ptestrootpass < create_test_db.sql
         pytest -v -cov --junitxml=report.xml
 
     - if: ${{ failure() }}
