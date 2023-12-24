@@ -12,6 +12,9 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+
+    - name: Set up MYSQL
+    
       
     - name: Install Plugin
       run: |
@@ -38,10 +41,19 @@ jobs:
     - name: Set up MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
-        mysql-root-host: ${{ secrets.DB_HOST }}
-        mysql-root-user: ${{ secrets.DB_USER }}
-        mysql-root-password: ${{ secrets.DB_PASSWORD }}
-        mysql-database: ${{ secrets.DB_DATABASE }}
+        host port: 3306
+        container port: 3306
+        character set server: utf8mb4
+        collation server: utf8mb4_general_ci
+        mysql version: latest
+        mysql root password: ${{ secrets.DB_PASSWORD }}
+        mysql database: ${{ secrets.DB_DATABASE }}
+        mysql user: ${{ secrets.DB_USER }}
+        mysql password: ${{ secrets.DB_PASSWORD }}
+
+    - name: Run SQL Scripts
+      run: |
+        mysql -h ${{ secrets.DB_HOST }} -u ${{ secrets.DB_USER }} -p"${{ secrets.DB_PASSWORD }}" ${{ secrets.DB_DATABASE }} < create_test_db.sql
         
     - name: Test Command
       if: always()
