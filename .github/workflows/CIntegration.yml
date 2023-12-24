@@ -11,6 +11,8 @@ jobs:
     services:
       mysql:
         image: mysql:8.0
+        ports:
+          - 33306:3306
         env:
           MYSQL_DATABASE: testdb
           MYSQL_ROOT_PASSWORD: testrootpass
