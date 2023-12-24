@@ -7,6 +7,11 @@ jobs:
   build:
     name: Build and Test for Integration
     runs-on: Ubuntu-latest
+    services:
+      image: mysql:8.0
+      ports: 3306:3306
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+  
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
@@ -34,27 +39,11 @@ jobs:
       run: |
         ls
         sudo mv ./hiddenCode/*.* ./
-
-    - name: Set up MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        host port: 127.0.0.1
-        container port: 3307
-        character set server: 'utf8'
-        collation server: 'utf8_general_ci'
-        mysql version: '8.0'
-        mysql root password: ${{ secrets.DB_PASSWORD }}
-        mysql database: ${{ secrets.DB_DATABASE }}
-        mysql user: ${{ secrets.DB_USER }}
-        mysql password: ${{ secrets.DB_PASSWORD }}
-
-    - name: Run SQL Scripts
-      run: |
-        mysql -h 127.0.0.1 -u ${{ secrets.DB_USER }} -p ${{ secrets.DB_PASSWORD }} < create_test_db.sql
         
     - name: Test Command
       if: always()
       run: |
+        mysql -h 127.0.0.1 -u ${{ secrets.DB_USER }} -p"${{ secrets.DB_PASSWORD }}" < create_test_db.sql
         pytest -v -cov --junitxml=report.xml
 
     - if: ${{ failure() }}
