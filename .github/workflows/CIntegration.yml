@@ -12,6 +12,13 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10' 
+
+    - name: Set up environment variables
+      env:
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_DATABASE: ${{ secrets.DB_DATABASE }}
         
     - name: Install Plugin
       run: |
@@ -36,7 +43,12 @@ jobs:
       run: |
         ls
         sudo mv ./hiddenCode/*.* ./
-
+        
+    - name: Set up Database
+      run: |
+        mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE"
+        mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_DATABASE setup_test_db.py
+        
     - name: Test Command
       if: always()
       run: |
