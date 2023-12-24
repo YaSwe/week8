@@ -50,7 +50,7 @@ jobs:
 
     - name: Run SQL Scripts
       run: |
-        mysql -h 127.0.0.1 -u ${{ secrets.DB_USER }} -p"${{ secrets.DB_PASSWORD }}" ${{ secrets.DB_DATABASE }} < create_test_db.sql
+        mysql -h 127.0.0.1 -u ${{ secrets.DB_USER }} -p ${{ secrets.DB_PASSWORD }} < create_test_db.sql
         
     - name: Test Command
       if: always()
