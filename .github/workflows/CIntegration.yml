@@ -28,6 +28,7 @@ jobs:
       run: |
         pip install pytest pytest-cov
         pip install flask
+        pip install mysql-connector-python
         
     - name: Checkout Development Code
       uses: actions/checkout@v4
