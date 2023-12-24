@@ -7,15 +7,24 @@ jobs:
   build:
     name: Build and Test for Integration
     runs-on: Ubuntu-latest
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root_password 
+          MYSQL_DATABASE: test_db 
+          MYSQL_USER: test_user 
+          MYSQL_PASSWORD: test_password
+        ports:
+          - 3306:3306 
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-
-    - name: Set up MYSQL
     
-      
     - name: Install Plugin
       run: |
         pip install pytest pytest-cov
@@ -37,19 +46,6 @@ jobs:
       run: |
         ls
         sudo mv ./hiddenCode/*.* ./
-
-    - name: Set up MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        host port: 3306
-        container port: 3306
-        character set server: utf8mb4
-        collation server: utf8mb4_general_ci
-        mysql version: latest
-        mysql root password: ${{ secrets.DB_PASSWORD }}
-        mysql database: ${{ secrets.DB_DATABASE }}
-        mysql user: ${{ secrets.DB_USER }}
-        mysql password: ${{ secrets.DB_PASSWORD }}
 
     - name: Run SQL Scripts
       run: |
