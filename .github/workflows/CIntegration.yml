@@ -16,6 +16,7 @@ jobs:
     - name: Install Plugin
       run: |
         pip install pytest pytest-cov
+        pip install flask
         pip install mysql-connector-python
         
     - name: Checkout Development Code
@@ -34,15 +35,6 @@ jobs:
       run: |
         ls
         sudo mv ./hiddenCode/*.* ./
-        
-    - name: Connect to MySQL and set up database
-      run: |
-        python setup_test_db.py
-      env:
-          DB_HOST: ${{ secrets.DB_HOST }} 
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
 
     - name: Test Command
       if: always()
