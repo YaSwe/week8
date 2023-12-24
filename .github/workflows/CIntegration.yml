@@ -47,8 +47,8 @@ jobs:
         
     - name: Set up Database
       run: |
-        mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE"
-        mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_DATABASE setup_test_db.py
+        mysql -h $DB_HOST -u $DB_USER -p"$DB_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE"
+        python setup_test_db.py
         
     - name: Test Command
       if: always()
