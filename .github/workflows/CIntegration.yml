@@ -35,13 +35,13 @@ jobs:
         ls
         sudo mv ./hiddenCode/*.* ./
 
-    - name: Setup MySQL
+    - name: Set up MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
-        mysql root password: root_password
-        mysql database: test_db
-        mysql user: test_user
-        mysql password: test_password
+        mysql-root-host: ${{ secrets.DB_HOST }}
+        mysql-root-user: ${{ secrets.DB_USER }}
+        mysql-root-password: ${{ secrets.DB_PASSWORD }}
+        mysql-database: ${{ secrets.DB_DATABASE }}
         
     - name: Test Command
       if: always()
