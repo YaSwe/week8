@@ -12,6 +12,7 @@ jobs:
       DB_USER : root
       DB_PASSWORD: root
       DB_DATABASE: test_db
+      DB_HOST: localhost
   
     steps:
     - uses: actions/checkout@v4
