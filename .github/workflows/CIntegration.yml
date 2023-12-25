@@ -61,8 +61,8 @@ jobs:
         export DB_PASSWORD=$DB_PASSWORD
         export DB_DATABASE=$DB_DATABASE
         
-        mysql --protocol=tcp -h 127.0.0.1 --port 3306 -uroot -ptestrootpass -e "DROP DATABASE IF EXISTS test_db;" 
-        mysql --protocol=tcp -h 127.0.0.1 --port 3306 -uroot -ptestrootpass < create_test_db.sql
+        mysql -h 127.0.0.1 --port 33306 -uroot -ptestrootpass -e "DROP DATABASE IF EXISTS test_db;" 
+        mysql -h 127.0.0.1 --port 33306 -uroot -ptestrootpass < create_test_db.sql
         pytest -v -cov --junitxml=report.xml
         
     - if: ${{ failure() }}
