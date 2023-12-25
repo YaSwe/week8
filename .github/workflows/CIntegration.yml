@@ -56,9 +56,9 @@ jobs:
     - name: Wait for MySQL service
       run: |
         retries=10
-        until mysql --protocol=tcp -h 127.0.0.1 --port 33306 -uroot -ptestrootpass -e "SELECT 1;" || [ $retries -eq 0 ]
+        until mysql --protocol=tcp -h 127.0.0.1 --port 33306 -uroot -ptestrootpass -e "SELECT 1;" || [ $retries -eq 0 ]; do
           retries=$((retries-1))
-          sleep 5 
+          sleep 5
         done
       
     - name: Test Command
