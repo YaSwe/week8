@@ -52,7 +52,14 @@ jobs:
       run: |
         ls
         sudo mv ./hiddenCode/*.* ./
-        
+
+    - name: Wait for MySQL service
+      run: |
+        retries=10
+        until mysql --protocol=tcp -h 127.0.0.1 --port 33306 -uroot -ptestrootpass -e "SELECT 1;" || [ $retries -eq 0 ]
+        retries=$((retries-1))
+        sleep 5 # Adjust the sleep duration as needed
+      
     - name: Test Command
       if: always()
       run: |
