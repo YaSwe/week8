@@ -14,8 +14,10 @@ jobs:
         ports:
           - 33306:3306
         env:
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: testrootpass
+          MYSQL_HOST: ${{ secrets.DB_HOST }}
+          MYSQL_USER: ${{ secrets.DB_USER }}
+          MYSQL_DATABASE: ${{ secrets.DB_DATABASE }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
   
     steps:
@@ -51,8 +53,8 @@ jobs:
     - name: Test Command
       if: always()
       run: |
-        mysql --protocol=tcp -h 127.0.0.1 --port 33306 -uroot -ptestrootpass -e "DROP DATABASE IF EXISTS test_db;" 
-        mysql --protocol=tcp -h 127.0.0.1 --port 33306 -uroot -ptestrootpass < create_test_db.sql
+        mysql --protocol=tcp -h ${{ secrets.DB_HOST}} --port 33306 -u ${{ secrets.DB_USER }} -p ${{ secrets.DB_PASSWORD }} -e "DROP DATABASE IF EXISTS test_db;" 
+        mysql --protocol=tcp -h ${{ secrets.DB_HOST}} --port 33306 -u ${{ secrets.DB_USER }} -p ${{ secrets.DB_PASSWORD }} < create_test_db.sql
         pytest -v -cov --junitxml=report.xml
 
     - if: ${{ failure() }}
