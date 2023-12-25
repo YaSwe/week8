@@ -56,10 +56,6 @@ jobs:
 
     - name: Set up MySQL
       run: |
-        export DB_HOST=$DB_HOST
-        export DB_USER=$DB_USER
-        export DB_PASSWORD=$DB_PASSWORD
-        export DB_DATABASE=$DB_DATABASE
         mysql -h 127.0.0.1 --port 3306 -uroot -ptestrootpass -e "DROP DATABASE IF EXISTS test_db;" 
         mysql -h 127.0.0.1 --port 3306 -uroot -ptestrootpass < create_test_db.sql
 
