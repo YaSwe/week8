@@ -56,6 +56,7 @@ jobs:
 
     - name: Set up MySQL
       run: |
+        mysql.server start
         mysql -h 127.0.0.1 --port 3306 -uroot -ptestrootpass -e "DROP DATABASE IF EXISTS test_db;" 
         mysql -h 127.0.0.1 --port 3306 -uroot -ptestrootpass < create_test_db.sql
 
