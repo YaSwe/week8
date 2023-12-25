@@ -5,14 +5,14 @@ account_bp = Blueprint('account', __name__)
 
 @account_bp.route('/')
 def index():
-    return render_template('index.html');
+    return render_template('index.html')
 
 @account_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
         pass
     else:
-        return render_template('register.html');
+        return render_template('register.html')
 
 @account_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -36,6 +36,5 @@ def login():
         else:
             # Else return back to login 
             return render_template('login.html', error='Invalid credentials')
-
     else:
         return render_template('login.html')
