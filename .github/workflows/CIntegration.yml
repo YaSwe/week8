@@ -17,11 +17,13 @@ jobs:
       mysql:
         image: mysql:8
         ports:
-          - 33306:3306
+          - 3306/tcp
         env:
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: testrootpass
-        options: --health-cmd="mysqladmin ping" --health-interval=40s --health-timeout=1s --health-retries=5
+          MYSQL_DATABASE: $ {{ secrets.DB_DATABASE }}
+          MYSQL_USER: ${{ secrets.DB_USER }}
+          MYSQL_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
   
     steps:
     - uses: actions/checkout@v4
@@ -61,8 +63,8 @@ jobs:
         export DB_PASSWORD=$DB_PASSWORD
         export DB_DATABASE=$DB_DATABASE
         
-        mysql -h 127.0.0.1 --port 33306 -uroot -ptestrootpass -e "DROP DATABASE IF EXISTS test_db;" 
-        mysql -h 127.0.0.1 --port 33306 -uroot -ptestrootpass < create_test_db.sql
+        mysql -h 127.0.0.1 --port 3306 -uroot -ptestrootpass -e "DROP DATABASE IF EXISTS test_db;" 
+        mysql -h 127.0.0.1 --port 3306 -uroot -ptestrootpass < create_test_db.sql
         pytest -v -cov --junitxml=report.xml
         
     - if: ${{ failure() }}
