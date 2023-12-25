@@ -46,7 +46,6 @@ jobs:
 
     - name: Set up MySQL
       run: |
-        sudo /etc/init.d/mysql start
         mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS test_db;" 
         mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD < create_test_db.sql
 
