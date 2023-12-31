@@ -1,4 +1,4 @@
-from flask import Flask, session, request, render_template
+from flask import Flask
 from account import account_bp
 from capstone import capstone_bp
 
