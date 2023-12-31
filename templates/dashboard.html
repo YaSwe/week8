@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="header">
+    <div class="title">TSAO Capstone Records System</div>
+    <a class="btn logoutBtn" href="/">Logout</a>
+</div>
+
+{% if account_type == 'Normal User' %}
+<main class="content">
+    <h1>Normal user - success</h1>
+</main>
+{% else %}
+<main class="content">
+    <h1>Administrator - success</h1>
+</main>
+{% endif %}
+
+{% endblock %}

@@ -137,6 +137,13 @@ input:not(:placeholder-shown) + .label label {
     font-size: 14px;
 }
 
+.success-text {
+    color: green;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 3rem;
+}
+
 .inputError {
     margin-top: 5px;
 }

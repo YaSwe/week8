@@ -11,26 +11,29 @@
         <h2>Create Account</h2>
         <!-- Username Input -->
         <div class="input-selection">
-            <input type="text" id="username" placeholder=" " required>
+            <input type="text" name="username" id="username" placeholder=" " required>
             <div class="label">
                 <label for="username">Username</label>
             </div>
-            <div class="error-text inputError hide">This field is required.</div>
         </div>
 
         <!-- Password Input -->
         <div class="input-selection">
-            <input type="password" id="password" placeholder=" " required>
+            <input type="password" name="password" id="password" placeholder=" " required>
             <div class="label">
                 <label for="password">Password</label>
             </div>
-            <div class="error-text inputError hide">This field is required.</div>
         </div>
 
         <div class="btns-group">
-            <input type="submit" class="btn" value="Sign Up">
+            <input type="submit" class="btn signUpBtn" value="Sign Up">
             <a class="btn cancelBtn" href="/">Cancel</a>
         </div>
+
+        {% if message == 'Successful registration' %}
+        <div class="success-text">Account succesfully sent for approval.</div>
+        {% endif %}
+        
         <div class="signUpLink">Have an account?<a class="underline-link" href="/login">Click here</a></div>
     </form>
 </main>

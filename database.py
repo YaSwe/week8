@@ -26,10 +26,5 @@ def get_database_connection():
     db_password = os.getenv('DB_PASSWORD')
     db_name = os.getenv('DB_DATABASE')
 
-    print(f"DB_HOST: {db_host}")
-    print(f"DB_USER: {db_user}")
-    print(f"DB_PASSWORD: {db_password}")
-    print(f"DB_DATABASE: {db_name}")
-
     return create_server_connection(db_host, db_user, db_password, db_name)
 
