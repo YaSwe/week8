@@ -1,7 +1,7 @@
 ---
 name: Someone just pushed
-[Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-[Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }}})
+Failed Run: [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+Codebase: [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }}})
 Workflow name: `${{ github.workflow }}`
 Job: `${{ github.job }}`
 labels: ''
