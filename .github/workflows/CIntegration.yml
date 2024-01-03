@@ -7,6 +7,12 @@ jobs:
   build:
     name: Build and Test for Integration
     runs-on: Ubuntu-latest
+    # Set up environment variables for connecting to test database
+    env:
+      DB_USER : root
+      DB_PASSWORD: root
+      DB_DATABASE: test_db
+      DB_HOST: localhost
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
@@ -41,9 +47,9 @@ jobs:
     - name: Set up MySQL
       run: |
         sudo /etc/init.d/mysql start
-        mysql -h localhost --port 3306 -uroot -proot -e "DROP DATABASE IF EXISTS test_db;"
-        mysql -h localhost --port 3306 -uroot -proot < create_test_db.sql
-        mysql -h localhost --port 3306 -uroot -proot -e "USE test_db; SHOW TABLES;"
+        mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS test_db;"
+        mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD < create_test_db.sql
+        mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD -e "USE test_db; SHOW TABLES;"
 
     - name: Lint Code with Flake8
       run: |
