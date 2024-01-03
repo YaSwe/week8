@@ -51,32 +51,22 @@ jobs:
         mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD < create_test_db.sql
         mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD -e "USE test_db; SHOW TABLES;"
 
-    - name: Run flake8
-      uses: suo/flake8-github-action@releases/v1
-      with:
-        checkName: 'Build and Test for Integration'   
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Linter Check with Flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics  
 
     - name: Run PyTest 
       if: always()
       run: |
         pytest -v -cov --junitxml=report.xml
-        
+
+    # Create issue using 
     - if: ${{ failure() }}
       name: Create Issue on Failed workflow
-      uses: dacbd/create-issue-action@main
-      with:
-        token: ${{ github.token }}
-        title: Action workflow failed.
-        body: |
-          ### Context
-          [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-          [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
-          Workflow name - `${{ github.workflow }}`
-          Job -           `${{ github.job }}`
-          status -        `${{ job.status }}`
-          assignees: YaSwe
+      uses: JasonEtco/create-an-issue@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
