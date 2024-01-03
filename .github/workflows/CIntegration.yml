@@ -85,6 +85,7 @@ jobs:
       run: |
         mkdir downloads
         mv report.xml ./downloads
+        
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with: 
