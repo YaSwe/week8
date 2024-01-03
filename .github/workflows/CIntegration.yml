@@ -7,13 +7,6 @@ jobs:
   build:
     name: Build and Test for Integration
     runs-on: Ubuntu-latest
-    
-    env:
-      DB_USER : root
-      DB_PASSWORD: root
-      DB_DATABASE: test_db
-      DB_HOST: localhost
-  
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
@@ -26,6 +19,7 @@ jobs:
         pip install flask
         pip install mysql-connector-python
         pip install python-dotenv
+        pip install flake8
         
     - name: Checkout Development Code
       uses: actions/checkout@v4
@@ -47,29 +41,29 @@ jobs:
     - name: Set up MySQL
       run: |
         sudo /etc/init.d/mysql start
-        mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS test_db;"
-        mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD < create_test_db.sql
-        mysql -h localhost --port 3306 -u$DB_USER -p$DB_PASSWORD -e "USE test_db; SHOW TABLES;"
+        mysql -h localhost --port 3306 -uroot -proot -e "DROP DATABASE IF EXISTS test_db;"
+        mysql -h localhost --port 3306 -uroot -proot < create_test_db.sql
+        mysql -h localhost --port 3306 -uroot -proot -e "USE test_db; SHOW TABLES;"
 
-    - name: Test Command
+    - name: Lint Code with Flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics  
+
+    - name: Run PyTest 
       if: always()
       run: |
         pytest -v -cov --junitxml=report.xml
         
-    - if: ${{ failure() }}
-      name: Create Issue on Failed workflow
-      uses: dacbd/create-issue-action@main
-      with: 
-        token: ${{ github.token }}
-        title: Action workflow Workflow name - `${{ github.workflow }}` failed.
-        body: |
-          ### Context
-          [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-          [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
-          Workflow name - `${{ github.workflow }}`
-          Job -           `${{ github.job }}`
-          status -        `${{ job.status }}`
-          assignees: YaSwe
+    - if: ${{failure()}}       
+      name: Create Issues
+      uses: nashmaniac/create-issue-action@v1.1
+      with:
+          title: Build Failed
+          token: ${{secrets.GITHUB_TOKEN}}
+          assignees: ${{github.actor}}
+          labels: worflow-failed
+          body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}
           
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
