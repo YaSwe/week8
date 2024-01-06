@@ -9,12 +9,25 @@
 </div>
 
 {% if account_type == 'Normal User' %}
-<main class="content">
-    <h1>Normal user - success</h1>
+<main class="mainPage">
+        <h1>Hi, {{ accountName }}</h1>
+        <h1>Welcome to the TSAO Capstone Records System</h1>
+        <div class="normalUserBtns">
+            <a class="btn createCapstoneBtn" href="/createCapstone">Create</a>
+            <a class="btn queryCapstoneBtn" href="/queryCapstone">Query</a>
+        </div>
 </main>
 {% else %}
-<main class="content">
-    <h1>Administrator - success</h1>
+<main class="mainPage">
+    <div class="greetings">
+        <h1>Hi, {{ accountName }}</h1>
+        <h1>Welcome to the TSAO Capstone Records System</h1>
+    </div>
+    <div class="normalUserBtns">
+        <a class="btn createCapstoneBtn" href="/createCapstone">Create</a>
+        <a class="btn modifyAccountsBtn" href="/modifyAccounts">Modify</a>
+        <a class="btn queryCapstoneBtn" href="/queryCapstone">Query</a>
+    </div>
 </main>
 {% endif %}
 

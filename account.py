@@ -33,9 +33,9 @@ def login():
                 session['account_type'] = account[4]
                 
                 if account[4] == 'Normal User':
-                    return render_template('dashboard.html', account_type='Normal User')
+                    return render_template('dashboard.html', accountName=account[1], account_type='Normal User')
                 elif account[4] == 'Administrator':
-                    return render_template('dashboard.html', account_type='Administrator')
+                    return render_template('dashboard.html', accountName=account[1], account_type='Administrator')
             else:
                 # If account is not approved, display error
                 return render_template('login.html', error='Account not approved')
