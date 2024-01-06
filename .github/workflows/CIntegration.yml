@@ -94,4 +94,4 @@ jobs:
     - name: Download Remote Test Results
       uses: actions/download-artifact@v2
       with:
-        name: testResultsd.'
+        name: testResults
