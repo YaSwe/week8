@@ -85,7 +85,6 @@ jobs:
       run: |
         mkdir downloads
         mv report.xml ./downloads
-        
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with: 
@@ -95,7 +94,4 @@ jobs:
     - name: Download Remote Test Results
       uses: actions/download-artifact@v2
       with:
-        name: testResults
-      uses: Ilshidur/action-discord@master
-      with:
-        args: 'A new commit for {{ EVENT_PAYLOAD.repository.full_name }} was pushed.'
+        name: testResultsd.'
