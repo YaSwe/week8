@@ -43,10 +43,10 @@ html {
 
 /* Content */
 
-.content {
-    display: grid;
-    grid-template-rows: 1fr;
-    justify-items: center;
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
@@ -151,6 +151,20 @@ input:not(:placeholder-shown) + .label label {
 .loginError {
     font-weight: 600;
     margin-top: 3rem;
+}
+
+/* Main Page */
+.greetings {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.normalUserBtns {
+    display: flex;
+    gap: 70px;
+    margin-top: 50px;
 }
 
 
