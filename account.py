@@ -29,7 +29,7 @@ def login():
             # Check if account is approved
             if account[5] == 'Approved':
                 # Save account_id in session storage
-                session['account_id'] = account[0]
+                session['account_username'] = account[1]
                 session['account_type'] = account[4]
                 
                 if account[4] == 'Normal User':
@@ -65,5 +65,18 @@ def register():
         return render_template('register.html', message='Successful registration')
     else:
         return render_template('register.html')
+    
+@account_bp.route('/dashboard') 
+def dashboard():
+    account_type = session.get('account_type')
+    account_name = session.get('account_username')
+
+    if account_type == 'Normal User':
+        return render_template('dashboard.html', accountName=account_name, account_type='Normal User')
+    elif account_type == 'Administrator':
+        return render_template('dashboard.html', accountName=account_name, account_type='Administrator')
+    else:
+        return render_template('login.html')
+
     
     

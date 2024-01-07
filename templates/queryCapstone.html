@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} <title>Capstone Entry Query</title>{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="title">TSAO Capstone Records System</div>
+</div>
+<main class="content">
+    <form action="/queryCapstone" method="POST">
+        <h2>Capstone Entry Query</h2>
+        <div class="input-selection">
+            <input type="text" name="academic-year" id="academic-year" placeholder="e.g. 2024">
+            <div class="label-active">
+                <label for="academic-year">By Academic Year</label>
+            </div>
+        </div>
+
+        <div class="input-selection">
+            <input type="text" name="keyword" id="keyword" placeholder="e.g. Quantum">
+            <div class="label-active">
+                <label for="keyword">By Keyword</label>
+            </div>
+        </div>
+
+        <div class="btns-group">
+            <input type="submit" class="btn searchBtn" value="Search">
+            <a class="btn returnBtn" href="/dashboard">Return</a>
+        </div>
+
+        {% if error == 'Invalid Year Format' %}
+        <div class="error-text">Invalid academic year format. Please try again.</div>
+        {% endif %}
+    </form>
+</main>
+
+{% endblock %}

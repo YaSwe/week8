@@ -26,6 +26,10 @@ html {
     font-size: 62.5%;
 }
 
+input {
+    border: none;
+}
+
 /* Header */
 
 .header {
@@ -85,7 +89,6 @@ input {
     color: var(--dark-grey);
     background: var(--light-grey);
 }
-
 input:focus {
     outline: none;
     border-color: var(--light-blue);
@@ -98,16 +101,22 @@ input:focus {
     display: flex;
     align-items: center;
     transition: .3s ease;
+    color: var(--dark-grey);
 }
 
 label {
-    color: var(--dark-grey);
     font-size: 14px;
 }
 
 input:focus + .label,
 input:not(:placeholder-shown) + .label {
     transform: translateY(-27px);
+}
+
+.label-active {
+    transform: translateY(-55px);
+    font-weight: 600;
+    color: black;
 }
 
 input:focus + .label label,
@@ -135,20 +144,13 @@ input:not(:placeholder-shown) + .label label {
 .error-text {
     color: var(--light-red);
     font-size: 14px;
+    font-weight: 600;
+    margin-top: 3rem;
 }
 
 .success-text {
     color: green;
     font-size: 14px;
-    font-weight: 600;
-    margin-top: 3rem;
-}
-
-.inputError {
-    margin-top: 5px;
-}
-
-.loginError {
     font-weight: 600;
     margin-top: 3rem;
 }
@@ -161,14 +163,60 @@ input:not(:placeholder-shown) + .label label {
     gap: 15px;
 }
 
-.normalUserBtns {
+.userBtns {
     display: flex;
     gap: 70px;
     margin-top: 50px;
 }
 
+/* Capstone Query Results*/
+
+.no-cp-msg {
+    color: var(--dark-blue);
+    font-weight: 600;
+}
+
+.cp-list {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+    gap: 10px;
+}
+
+.cp-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    width: 1000px;
+    font-size: 0.8rem;
+    transition: transform ease-in-out 0.2s;
+    background-color: var(--light-grey);
+    box-shadow: 0 1px 1px rgba(0.1, 0.1, 0.1, 0.5);
+}
+
+.cp-container:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.cp-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+
+.cp-pic {
+    color: var(--dark-grey);
+}
 
 /* Buttons */
+
+.btns-group {
+    display: flex;
+    gap: 30px;
+}
 
 .btn {
     padding: 10px 15px;
