@@ -8,27 +8,21 @@
     <a class="btn logoutBtn" href="/">Logout</a>
 </div>
 
-{% if account_type == 'Normal User' %}
-<main class="mainPage">
-        <h1>Hi, {{ accountName }}</h1>
-        <h1>Welcome to the TSAO Capstone Records System</h1>
-        <div class="normalUserBtns">
-            <a class="btn createCapstoneBtn" href="/createCapstone">Create</a>
-            <a class="btn queryCapstoneBtn" href="/queryCapstone">Query</a>
-        </div>
-</main>
-{% else %}
-<main class="mainPage">
+<main class="content">
     <div class="greetings">
         <h1>Hi, {{ accountName }}</h1>
         <h1>Welcome to the TSAO Capstone Records System</h1>
     </div>
-    <div class="normalUserBtns">
+    <div class="userBtns">
+        {% if account_type == 'Normal User' %}
+        <a class="btn createCapstoneBtn" href="/createCapstone">Create</a>
+        <a class="btn queryCapstoneBtn" href="/queryCapstone">Query</a>
+        {% else %}
         <a class="btn createCapstoneBtn" href="/createCapstone">Create</a>
         <a class="btn modifyAccountsBtn" href="/modifyAccounts">Modify</a>
         <a class="btn queryCapstoneBtn" href="/queryCapstone">Query</a>
+        {% endif %}
     </div>
 </main>
-{% endif %}
 
 {% endblock %}
