@@ -85,7 +85,6 @@ jobs:
       run: |
         mkdir downloads
         mv report.xml ./downloads
-        
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with: 
@@ -96,10 +95,3 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: testResults
-
-    - name: Discord notification
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-      uses: Ilshidur/action-discord@master
-      with:
-        args: 'A new commit for {{ EVENT_PAYLOAD.repository.full_name }} was pushed.'
