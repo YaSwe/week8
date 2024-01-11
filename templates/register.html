@@ -10,19 +10,15 @@
     <form action="/register" method="POST">
         <h2>Create Account</h2>
         <!-- Username Input -->
-        <div class="input-selection">
-            <input type="text" name="username" id="username" placeholder=" " required>
-            <div class="label">
-                <label for="username">Username</label>
-            </div>
+        <div class="input-group">
+            <input type="text" name="username" id="username" required>  
+            <label for="username">Username</label>
         </div>
 
         <!-- Password Input -->
-        <div class="input-selection">
-            <input type="password" name="password" id="password" placeholder=" " required>
-            <div class="label">
-                <label for="password">Password</label>
-            </div>
+        <div class="input-group">
+            <input type="password" name="password" id="password" required>
+            <label for="password">Password</label>
         </div>
 
         <div class="btns-group">
@@ -34,7 +30,7 @@
         <div class="success-text">Account succesfully sent for approval.</div>
         {% endif %}
         
-        <div class="signUpLink">Have an account?<a class="underline-link" href="/login">Click here</a></div>
+        <div class="signUpLink">Have an account?<a class="redirect-link" href="/login">Login</a></div>
     </form>
 </main>
 {% endblock %}
