@@ -30,6 +30,10 @@ input {
     border: none;
 }
 
+h1 {
+    text-align: center;
+}
+
 /* Header */
 
 .header {
@@ -59,7 +63,7 @@ main {
 
 form {
     background: var(--light-grey);
-    padding: 2.5rem;
+    padding: 3rem 4rem 3rem 3rem;
     border-radius: 0.8rem;
     display: flex;
     flex-direction: column;
@@ -67,77 +71,63 @@ form {
 }
 
 form h2 {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     font-size: 20px;
     color: var(--cyan)
 }
 
-.input-selection {
+.input-group {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 4rem;
-    width: 300px;
+    width: 250px;
+    margin-bottom: 3rem;
 }
 
-input {
-    padding: 5px 0;
-    border: none;
-    border-bottom: 1px solid var(--dark-grey);
-    transition: .3s ease;
-    font-size: 14px;
+.input-group input {
+    width: 100%;
+    padding: 10px 0 10px 10px;
+    border: 1px solid var(--dark-grey);
+    background: transparent;
     color: var(--dark-grey);
-    background: var(--light-grey);
-}
-input:focus {
+    border-radius: 5px;
+    font-size: 15px;
     outline: none;
-    border-color: var(--light-blue);
-    box-shadow: 0 1px 0 0 var(--dark-blue);
 }
 
-.label {
+.input-group label, .input-group textarea {
     position: absolute;
-    height: 70%;
-    display: flex;
-    align-items: center;
-    transition: .3s ease;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    padding: 0 5px;
+    pointer-events: none;
+    font-size: 15px;
     color: var(--dark-grey);
+    transition: .3s ease;
 }
 
-label {
+.input-group input:valid ~ label,
+.input-group input:focus ~ label
+{
+    top: 0;
+    color: var(--dark-blue);
     font-size: 14px;
-}
-
-input:focus + .label,
-input:not(:placeholder-shown) + .label {
-    transform: translateY(-27px);
-}
-
-.label-active {
-    transform: translateY(-55px);
-    font-weight: 600;
-    color: black;
-}
-
-input:focus + .label label,
-input:not(:placeholder-shown) + .label label {
-    font-weight: 600;
-    color: black;
+    background: var(--light-grey);
 }
 
 .signUpLink, .loginLink {
     font-size: 14px;
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 
-.underline-link {
-    text-decoration: underline;
+.redirect-link {
     color: var(--dark-blue);
     margin-left: 2px;
-    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
 }
 
-.underline-link:hover {
+.redirect-link:hover {
+    cursor: pointer;
     color: var(--light-blue);
 }
 
@@ -165,8 +155,82 @@ input:not(:placeholder-shown) + .label label {
 
 .userBtns {
     display: flex;
-    gap: 70px;
+    gap: 60px;
     margin-top: 50px;
+}
+
+/* Create Capstone */
+.cp-form {
+    background: var(--light-grey);
+    padding: 2.5rem;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    gap: 2rem;
+    margin-top: 150px;
+    align-items: center;
+}
+
+.cp-form h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.cp-form .input-group {
+    width: 320px;
+    margin-bottom: 0;
+}
+
+.width {
+    width: 150px !important;
+}
+
+.input-groups {
+    display: flex;
+    justify-content: space-between;
+    width: 690px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.radio {
+    display: flex;
+    gap: 5px;
+}
+
+.textarea-input {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+}
+
+textarea {
+    background: transparent;
+    border: 1px solid var(--dark-grey);
+    color: var(--dark-grey);
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+    padding: 10px;
+}
+
+textarea:focus {
+    border-color: var(--dark-blue);
+    font-size: 15px;
 }
 
 /* Capstone Query Results*/
@@ -227,6 +291,7 @@ input:not(:placeholder-shown) + .label label {
     color: var(--white);
     text-decoration: none;
     font-size: 14px;
+    font-weight: 600;
 }
 
 .btn:hover {
