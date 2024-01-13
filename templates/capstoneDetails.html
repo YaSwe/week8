@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %} <title>Capstone Details</title>{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="title">TSAO Capstone Records System</div>
+</div>
+<main class="content">
+    <form class="cp-form" action="/modifyCapstone" method="POST">
+        <div class="form-container">
+            <h2>{{ capstone_project[5] }}</h2>
+            
+            <div class="input-groups">
+                <div class="input-group">
+                    <input type="text" name="cp-name" id="cp-name" value="{{ capstone_project[1] }}">
+                    <label for="cp-name">Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="cp-title" id="cp-title" value="{{ capstone_project[5] }}">
+                    <label for="cp-title">Capstone Title</label>
+                </div>
+            </div>
+
+            <div class="input-groups">   
+                {% if capstone_project[2] == "Staff" %}  
+                <div class="radio-group">
+                    <label for="cp-roleOfContact">Role of Contact</label>
+                    <div class="radio">
+                        <input type="radio" id="roleOfContact-staff" name="cp-roleOfContact" value="Staff" checked>
+                        <label for="roleOfContact-staff">Staff</label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" id="roleOfContact-student" name="cp-roleOfContact" value="Student">
+                        <label for="roleOfContact-student">Student</label>
+                    </div>
+                </div>
+                {% else %}
+                <div class="radio-group">
+                    <label for="cp-roleOfContact">Role of Contact</label>
+                    <div class="radio">
+                        <input type="radio" id="roleOfContact-staff" name="cp-roleOfContact" value="Staff">
+                        <label for="roleOfContact-staff">Staff</label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" id="roleOfContact-student" name="cp-roleOfContact" value="Student" checked>
+                        <label for="roleOfContact-student">Student</label>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="input-container">
+                    <div class="input-group width">
+                        <input type="text" name="cp-noOfStudents" id="cp-noOfStudents" value="{{ capstone_project[3] }}">
+                        <label for="cp-noOfStudents">No. of Students</label>
+                    </div>
+
+                    <div class="input-group width">
+                        <input type="text" name="cp-academicYear" id="cp-academicYear" value="{{ capstone_project[4] }}">
+                        <label for="cp-academicYear">Academic Year</label>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-group">
+                        <input type="text" name="cp-companyName" id="cp-companyName" value="{{ capstone_project[6] }}">
+                        <label for="cp-companyName">Name of Company</label>
+                    </div>
+        
+                    <div class="input-group">
+                        <input type="text" name="cp-pointOfContact" id="cp-pointOfContact" value="{{ capstone_project[7] }}">
+                        <label for="cp-pointOfContact">Company Point of Contact</label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="textarea-input">
+                <label for="cp-description">Description of Project</label>
+                <textarea name="cp-description" id="cp-description" cols="30" rows="5">{{ capstone_project[8] }}</textarea>
+            </div>
+        
+            <div class="btns-group">
+                <input type="submit" class="btn modifyCpBtn" value="Modify">
+                <a class="btn returnBtn" href="/queryCapstone">Return</a>
+            </div>
+
+            {% if message == 'Successful Capstone Modification' %}
+            <div class="success-text">Capstone project successfully modified.</div>
+            {% endif %}
+        </div>
+    </form>
+</main>
+
+{% endblock %}

@@ -8,72 +8,73 @@
 </div>
 <main class="content">
     <form class="cp-form" action="/createCapstone" method="POST">
-        <h2>Create New Capstone Entry</h2>
+        <div class="form-container">
+            <h2>Create New Capstone Entry</h2>
+            
+            <div class="input-groups">
+                <div class="input-group">
+                    <input type="text" name="cp-name" id="cp-name" placeholder="e.g. John Doe">
+                    <label for="cp-name">Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="cp-title" id="cp-title" placeholder="e.g. Quantum Mechanics">
+                    <label for="cp-title">Capstone Title</label>
+                </div>
+            </div>
+
+            <div class="input-groups">     
+                <div class="radio-group">
+                    <label for="cp-roleOfContact">Role of Contact</label>
+                    <div class="radio">
+                        <input type="radio" id="roleOfContact-staff" name="cp-roleOfContact" value="Staff">
+                        <label for="roleOfContact-staff">Staff</label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" id="roleOfContact-student" name="cp-roleOfContact" value="Student">
+                        <label for="roleOfContact-student">Student</label>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-group width">
+                        <input type="text" name="cp-noOfStudents" id="cp-noOfStudents" placeholder="e.g. 4">
+                        <label for="cp-noOfStudents">No. of Students</label>
+                    </div>
+
+                    <div class="input-group width">
+                        <input type="text" name="cp-academicYear" id="cp-academicYear" placeholder="e.g. 2023/2024">
+                        <label for="cp-academicYear">Academic Year</label>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-group">
+                        <input type="text" name="cp-companyName" id="cp-companyName" placeholder="e.g. KK Company">
+                        <label for="cp-companyName">Name of Company</label>
+                    </div>
         
-        <div class="input-groups">
-            <div class="input-group">
-                <input type="text" name="cp-name" id="cp-name" placeholder="e.g. John Doe">
-                <label for="cp-name">Name</label>
+                    <div class="input-group">
+                        <input type="text" name="cp-pointOfContact" id="cp-pointOfContact" placeholder="e.g. Josh Dean">
+                        <label for="cp-pointOfContact">Company Point of Contact</label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="textarea-input">
+                <label for="cp-description">Description of Project</label>
+                <textarea name="cp-description" id="cp-description" cols="30" rows="5"></textarea>
+            </div>
+        
+            <div class="btns-group">
+                <input type="submit" class="btn createCpBtn" value="Create">
+                <a class="btn cancelBtn" href="/dashboard">Cancel</a>
             </div>
 
-            <div class="input-group">
-                <input type="text" name="cp-title" id="cp-title" placeholder="e.g. Quantum Mechanics">
-                <label for="cp-title">Capstone Title</label>
-            </div>
+            {% if message == 'Successful Capstone Creation' %}
+            <div class="success-text">Capstone project successfully created.</div>
+            {% endif %}
         </div>
-
-        <div class="input-groups">     
-            <div class="radio-group">
-                <label for="cp-roleOfContact">Role of Contact</label>
-                <div class="radio">
-                    <input type="radio" id="roleOfContact-staff" name="cp-roleOfContact" value="Staff">
-                    <label for="roleOfContact-staff">Staff</label>
-                </div>
-                <div class="radio">
-                    <input type="radio" id="roleOfContact-student" name="cp-roleOfContact" value="Student">
-                    <label for="roleOfContact-student">Student</label>
-                </div>
-            </div>
-
-            <div class="input-container">
-                <div class="input-group width">
-                    <input type="text" name="cp-noOfStudents" id="cp-noOfStudents" placeholder="e.g. 4">
-                    <label for="cp-noOfStudents">No. of Students</label>
-                </div>
-
-                <div class="input-group width">
-                    <input type="text" name="cp-academicYear" id="cp-academicYear" placeholder="e.g. 2023/2024">
-                    <label for="cp-academicYear">Academic Year</label>
-                </div>
-            </div>
-
-            <div class="input-container">
-                <div class="input-group">
-                    <input type="text" name="cp-companyName" id="cp-companyName" placeholder="e.g. KK Company">
-                    <label for="cp-companyName">Name of Company</label>
-                </div>
-    
-                <div class="input-group">
-                    <input type="text" name="cp-pointOfContact" id="cp-pointOfContact" placeholder="e.g. Josh Dean">
-                    <label for="cp-pointOfContact">Company Point of Contact</label>
-                </div>
-            </div>
-        </div>
-       
-        <div class="textarea-input">
-            <label for="cp-description">Description of Project</label>
-            <textarea name="cp-description" id="cp-description" cols="30" rows="5"></textarea>
-        </div>
-       
-        <div class="btns-group">
-            <input type="submit" class="btn createCpBtn" value="Create">
-            <a class="btn cancelBtn" href="/dashboard">Cancel</a>
-        </div>
-
-        {% if message == 'Successful Capstone Creation' %}
-        <div class="success-text">Capstone project successfully created.</div>
-        {% endif %}
-
     </form>
 </main>
 
