@@ -8,27 +8,29 @@
 </div>
 <main class="content">
     <form action="/queryCapstone" method="POST">
-        <h2>Capstone Entry Query</h2>
-        <!-- Academic year Input -->
-        <div class="input-group">
-            <input type="text" name="academic-year" id="academic-year" placeholder="e.g. 2024">
-            <label for="academic-year">By Academic Year</label>
-        </div>
+        <div class="form-container">
+            <h2>Capstone Entry Query</h2>
+            <!-- Academic year Input -->
+            <div class="input-group">
+                <input type="text" name="academic-year" id="academic-year" placeholder="e.g. 2024">
+                <label for="academic-year">By Academic Year</label>
+            </div>
 
-        <!-- Capstone title/desc Input -->
-        <div class="input-group">
-            <input type="text" name="keyword" id="keyword" placeholder="e.g. Quantum">
-            <label for="keyword">By Keyword</label>
-        </div>
+            <!-- Capstone title/desc Input -->
+            <div class="input-group">
+                <input type="text" name="keyword" id="keyword" placeholder="e.g. Quantum">
+                <label for="keyword">By Keyword</label>
+            </div>
 
-        <div class="btns-group">
-            <input type="submit" class="btn searchBtn" value="Search">
-            <a class="btn returnBtn" href="/dashboard">Return</a>
-        </div>
+            <div class="btns-group">
+                <input type="submit" class="btn searchBtn" value="Search">
+                <a class="btn returnBtn" href="/dashboard">Return</a>
+            </div>
 
-        {% if error == 'Invalid Year Format' %}
-        <div class="error-text">Invalid academic year format. Please try again.</div>
-        {% endif %}
+            {% if error == 'Invalid Year Format' %}
+            <div class="error-text">Invalid academic year format. Please try again.</div>
+            {% endif %}
+        </div>
     </form>
 </main>
 

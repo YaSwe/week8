@@ -11,10 +11,10 @@
         {% if capstone_projects %}
         <div class="cp-list">
         {% for cp in capstone_projects %}
-            <div class="cp-container">
+            <a class="cp-container" href="{{ url_for('capstone.capstoneDetails', cp_id=cp[0]) }}">
                 <p class="cp-title">{{ cp[5] }}</p>
                 <p class="cp-pic">{{ cp[1] }}</p>
-            </div>
+            </a>
         {% endfor %}
         </div>
         <div class="btns-group">

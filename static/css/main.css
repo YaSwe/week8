@@ -63,28 +63,31 @@ main {
 
 form {
     background: var(--light-grey);
-    padding: 3rem 4rem 3rem 3rem;
     border-radius: 0.8rem;
     display: flex;
+}
+
+.form-container {
+    display: flex;
     flex-direction: column;
-    align-items: center; 
+    gap: 60px;
+    align-items: center;
+    padding: 3rem;
 }
 
 form h2 {
-    margin-bottom: 3rem;
     font-size: 20px;
     color: var(--cyan)
 }
 
 .input-group {
     position: relative;
-    width: 250px;
-    margin-bottom: 3rem;
+    width: 100%;
 }
 
 .input-group input {
-    width: 100%;
-    padding: 10px 0 10px 10px;
+    width: 250px;
+    padding: 10px;
     border: 1px solid var(--dark-grey);
     background: transparent;
     color: var(--dark-grey);
@@ -115,13 +118,13 @@ form h2 {
 }
 
 .signUpLink, .loginLink {
+    display: flex;
+    gap: 5px;
     font-size: 14px;
-    margin-top: 4rem;
 }
 
 .redirect-link {
     color: var(--dark-blue);
-    margin-left: 2px;
     text-decoration: none;
     font-weight: 600;
 }
@@ -151,25 +154,16 @@ form h2 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 60px;
 }
 
-.userBtns {
-    display: flex;
-    gap: 60px;
-    margin-top: 50px;
-}
-
-/* Create Capstone */
+/* Capstone form (query, details) */
 .cp-form {
-    background: var(--light-grey);
-    padding: 2.5rem;
-    border-radius: 0.8rem;
-    display: flex;
-    flex-direction: column;
-    width: 700px;
-    gap: 2rem;
     margin-top: 150px;
-    align-items: center;
+}
+
+.cp-form .form-container {
+    width: 700px;
 }
 
 .cp-form h2 {
@@ -177,19 +171,26 @@ form h2 {
     text-align: center;
 }
 
+.cp-form input[type="text"] {
+    width: 310px;
+}
+
 .cp-form .input-group {
-    width: 320px;
-    margin-bottom: 0;
+    width: 330px;
 }
 
 .width {
+    width: 170px !important;
+}
+
+.width input {
     width: 150px !important;
 }
 
 .input-groups {
     display: flex;
     justify-content: space-between;
-    width: 690px;
+    width: 100%;
 }
 
 .input-container {
@@ -257,6 +258,7 @@ textarea:focus {
     transition: transform ease-in-out 0.2s;
     background-color: var(--light-grey);
     box-shadow: 0 1px 1px rgba(0.1, 0.1, 0.1, 0.5);
+    text-decoration: none;
 }
 
 .cp-container:hover {
@@ -269,6 +271,7 @@ textarea:focus {
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 600;
+    color: var(--dark-blue);
 }
 
 .cp-pic {
@@ -279,12 +282,12 @@ textarea:focus {
 
 .btns-group {
     display: flex;
-    gap: 30px;
+    gap: 60px;
 }
 
 .btn {
-    padding: 10px 15px;
-    border-radius: 0.5rem;
+    padding: 8px 20px;
+    border-radius: 20px;
     cursor: pointer;
     transition: .3s;
     background-color: var(--light-blue);
@@ -299,11 +302,25 @@ textarea:focus {
 }
 
 .cancelBtn {
-    background-color: var(--light-red);
+    background: transparent;
+    color: var(--light-red);
+    border: 1px solid var(--red);
 }
 
 .cancelBtn:hover {
+    color: var(--white);
     background-color: var(--red);
+}
+
+.logInOutBtn {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.logInOutBtn:hover {
+    color: var(--dark-blue);
+    background-color: var(--white);
 }
 
 /* Misc */
