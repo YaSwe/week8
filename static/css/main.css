@@ -323,6 +323,15 @@ textarea:focus {
     background-color: var(--white);
 }
 
+.delCapstoneBtn {
+    background-color: var(--light-red);
+    color: var(--white);
+}
+
+.delCapstoneBtn:hover {
+    background-color: var(--red);
+}
+
 /* Misc */
 
 .hide {
