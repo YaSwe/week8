@@ -11,7 +11,7 @@
         {% if capstone_projects %}
         <div class="cp-list">
         {% for cp in capstone_projects %}
-            <a class="cp-container" href="{{ url_for('capstone.capstoneDetails', cp_id=cp[0]) }}">
+            <a class="cp-container" href="{{ url_for('capstone.capstoneDetails', cp_id=cp[0], academic_year=academic_year, keyword=keyword) }}">
                 <p class="cp-title">{{ cp[5] }}</p>
                 <p class="cp-pic">{{ cp[1] }}</p>
             </a>
