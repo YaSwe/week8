@@ -146,7 +146,7 @@ def modifyCapstone(cp_id):
 
     return capstoneDetails(cp_id, message='Successful Capstone Modification')
 
-@capstone_bp.route('/deleteCapstone/<int:cp_id>')
+@capstone_bp.route('/deleteCapstone/<int:cp_id>', methods=['POST'])
 def deleteCapstone(cp_id):
     # Connect to database
     connection = get_database_connection()
