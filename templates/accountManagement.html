@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Account Management</title>{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="title">TSAO Capstone Records System</div>
+</div>
+<main class="content">
+    <h2>Account Management</h2>
+    {% if accounts %}
+    <table class="acc-table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Creation Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for acc in accounts %}
+            <tr>
+                <td>{{ acc[1] }}</td>
+                <td>{{ acc[2] }}</td>
+                <td>{{ acc[4] }}</td>
+                <td>{{ acc[3].strftime('%m-%d-%Y') }}</td>
+                <td>
+                    <a class="editBtn" href="{{ url_for('account.accountDetails', acc_id=acc[0]) }}">Edit</a>
+                    <a class="deleteBtn" href="">Delete</a>
+                    <a class="approveBtn" href="">Approve</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="btns-group">
+        <a class="btn returnBtn" href="/dashboard">Return</a>
+    </div>
+    {% else %}
+    <p class="no-acc-msg">No accounts found.</p>
+    <div class="btns-group">
+        <a class="btn returnBtn" href="/dashboard">Return</a>
+    </div>
+    {% endif %}
+</main>
+
+{% endblock %}

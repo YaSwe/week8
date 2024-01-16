@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Account Details</title>{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="title">TSAO Capstone Records System</div>
+</div>
+<main class="content">
+    <form class="cp-form" action="/modifyAccount/{{ account[0] }}" method="POST">
+        <div class="form-container">
+            <h2>Account Details</h2>
+            <div class="input-groups">
+                <div class="input-group">
+                    <input type="text" name="acc-name" id="acc-name" value="{{ account[1] }}">
+                    <label for="acc-name">Username</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="acc-pwd" id="acc-pwd" value="{{ account[2] }}">
+                    <label for="acc-pwd">Password</label>
+                </div>
+            </div>
+
+            <div class="input-groups">
+                <div class="radio-group acc-radio">
+                    <label for="acc-type">Account Type</label>
+                    <div class="radio">
+                        <input type="radio" id="type-user" name="acc-type" value="Normal User" checked>
+                        <label for="type-user">User</label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" id="type-admin" name="acc-type" value="Administrator">
+                        <label for="type-admin">Admin</label>
+                    </div>
+                </div>
+
+                <div class="input-group date">
+                    <label for="acc-date">Creation Date</label>
+                    <input type="date" name="acc-date" id="acc-date" value="{{ account[3] }}">
+                </div>
+            </div>
+            
+            <div class="btns-group">
+                <input type="submit" class="btn modifyAccBtn" value="Modify">
+                <a class="btn returnBtn" href="/accountManagement">Return</a>
+            </div>
+
+            {% if message == 'Successful Account Modification' %}
+            <div class="success-text">Account successfully modified.</div>
+            {% endif %}
+        </div>
+    </form>
+</main>
+
+{% endblock %}

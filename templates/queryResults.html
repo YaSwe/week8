@@ -8,26 +8,25 @@
 </div>
 <main class="content">
     <h2>Capstone Query Results</h2>
-        {% if capstone_projects %}
-        <div class="cp-list">
-        {% for cp in capstone_projects %}
-            <a class="cp-container" href="{{ url_for('capstone.capstoneDetails', cp_id=cp[0], academic_year=academic_year, keyword=keyword) }}">
-                <p class="cp-title">{{ cp[5] }}</p>
-                <p class="cp-pic">{{ cp[1] }}</p>
-            </a>
-        {% endfor %}
-        </div>
-        <div class="btns-group">
-            <a class="btn exportBtn" href="/exportCapstoneResults">Export</a>
-            <a class="btn returnBtn" href="/dashboard">Return</a>
-        </div>
-        {% else %}
-        <p class="no-cp-msg">No capstone projects found.</p>
-        <div class="btns-group">
-            <a class="btn returnBtn" href="/dashboard">Return</a>
-        </div>
-        {% endif %}
+    {% if capstone_projects %}
+    <div class="cp-list">
+    {% for cp in capstone_projects %}
+        <a class="cp-container" href="{{ url_for('capstone.capstoneDetails', cp_id=cp[0], academic_year=academic_year, keyword=keyword) }}">
+            <p class="cp-title">{{ cp[5] }}</p>
+            <p class="cp-pic">{{ cp[1] }}</p>
+        </a>
+    {% endfor %}
     </div>
+    <div class="btns-group">
+        <a class="btn exportBtn" href="/exportCapstoneResults">Export</a>
+        <a class="btn returnBtn" href="/dashboard">Return</a>
+    </div>
+    {% else %}
+    <p class="no-cp-msg">No capstone projects found.</p>
+    <div class="btns-group">
+        <a class="btn returnBtn" href="/dashboard">Return</a>
+    </div>
+    {% endif %}
 </main>
 
 {% endblock %}

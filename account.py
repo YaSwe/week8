@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, redirect, url_for
 from database import get_database_connection
 from datetime import datetime
 
@@ -77,6 +77,58 @@ def dashboard():
         return render_template('dashboard.html', accountName=account_name, account_type='Administrator')
     else:
         return render_template('login.html')
+    
+@account_bp.route('/accountManagement', methods=['GET'])
+def accountManagement():
+    # Connect to database
+    connection = get_database_connection()
+    cursor = connection.cursor()
+
+    #SQL Query base
+    query = "SELECT * FROM accounts"
+
+    # Execute the SQL Query
+    cursor.execute(query)
+    accounts = cursor.fetchall()
+
+    return render_template('accountManagement.html', accounts=accounts)
+
+@account_bp.route('/accountDetails/<int:acc_id>')
+def accountDetails(acc_id, message=''):
+    # Connect to the database
+    connection = get_database_connection()
+    cursor = connection.cursor()
+
+    # Query the specific account by ID
+    query = "SELECT * FROM accounts WHERE account_id = %s"
+    cursor.execute(query, (acc_id,))
+    account = cursor.fetchone()
+
+    return render_template('accountDetails.html', account=account, message=message)
+
+@account_bp.route('/modifyAccount/<int:acc_id>', methods=['POST'])
+def modifyAccount(acc_id):
+    acc_name = request.form['acc-name']
+    acc_pwd = request.form['acc-pwd']
+    acc_date = request.form['acc-date']
+
+    # Get radio input value
+    acc_type = request.form.get('acc-type')
+
+    # Connect to database
+    connection = get_database_connection()
+    cursor = connection.cursor()
+
+    #SQL Query base
+    query = """UPDATE accounts SET username=%s, password=%s, creation_date=%s, account_type=%s WHERE account_id=%s"""
+    
+    cursor.execute(query, (acc_name, acc_pwd, acc_date, acc_type, acc_id))
+    connection.commit()
+
+    return accountDetails(acc_id, message='Successful Account Modification')
+
+
+
 
     
     

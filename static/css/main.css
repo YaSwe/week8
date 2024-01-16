@@ -201,6 +201,7 @@ form h2 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    
 }
 
 .radio {
@@ -234,12 +235,12 @@ textarea:focus {
 
 /* Capstone Query Results*/
 
-.no-cp-msg {
+.no-cp-msg, .no-acc-msg {
     color: var(--dark-blue);
     font-weight: 600;
 }
 
-.cp-list {
+.cp-list, .acc-list {
     display: flex;
     flex-direction: column;
     margin: 2rem 0;
@@ -274,6 +275,64 @@ textarea:focus {
 
 .cp-pic {
     color: var(--dark-grey);
+}
+
+/* Account Management */
+
+.acc-header{
+    display: flex;
+    gap: 100px;
+    margin-top: 4rem;
+}
+
+.acc-list {
+    margin-bottom: 4rem;
+}
+
+.acc-table {
+    border-collapse: collapse;
+    margin: 4rem 0;
+    box-shadow: 0 1px 1px rgba(0.1, 0.1, 0.1, 0.5);
+}
+
+.acc-table th, .acc-table td {
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.acc-table th {
+    background-color: var(--white);
+    color: var(--cyan);
+}
+
+.acc-table td {
+    font-size: 14px;
+}
+
+.acc-table td a {
+    text-decoration: none;
+    color: var(--dark-grey);
+    padding: 5px;
+    font-weight: 600;
+}
+
+.acc-table td a:hover {
+    color: var(--dark-blue);
+}
+
+.acc-table tr {
+    background-color: var(--light-grey);
+    box-shadow: 0 1px 1px rgba(0.1, 0.1, 0.1, 0.5);
+}
+
+/* Account Details */
+
+.date label {
+    position: static;
+}
+
+.acc-radio {
+    margin-left: 60px;
 }
 
 /* Buttons */
