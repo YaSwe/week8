@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, redirect, url_for
 from database import get_database_connection
 
 capstone_bp = Blueprint('capstone', __name__)
@@ -120,5 +120,5 @@ def modifyCapstone(cp_id):
     cursor.execute(query, (cp_name, cp_roleOfContact, cp_noOfStudents, cp_academicYear, cp_title, cp_companyName, cp_pointOfContract, cp_desc, cp_id))
     connection.commit()
 
-    return capstoneDetails(cp_id, message='Successful Capstone Modification')
+    return redirect(url_for('capstone.capstoneDetails', cp_id=cp_id, message='Successful'))
     
