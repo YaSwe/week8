@@ -7,7 +7,7 @@
     <div class="title">TSAO Capstone Records System</div>
 </div>
 <main class="content">
-    <form class="cp-form" action="/modifyCapstone" method="POST">
+    <form class="cp-form" action="/modifyCapstone/{{ capstone_project[0] }}" method="POST">
         <div class="form-container">
             <h2>{{ capstone_project[5] }}</h2>
             
@@ -90,6 +90,14 @@
 
             {% if message == 'Successful Capstone Modification' %}
             <div class="success-text">Capstone project successfully modified.</div>
+            {% endif %}
+
+            {% if error == 'Invalid Number of Students' %}
+            <div class="error-text">Invalid Number of Students.</div>
+            {% endif %}
+
+            {% if error == 'Invalid Year Format' %}
+            <div class="error-text">Invalid Academic Year.</div>
             {% endif %}
         </div>
     </form>
