@@ -83,7 +83,7 @@
             <div class="btns-group">
                 <input type="submit" class="btn modifyCpBtn" value="Modify">
                 {% if account_type == "Administrator" %}
-                <a class="btn delCapstoneBtn" href="/deleteCapstone">Delete</a>
+                <a class="btn delCapstoneBtn" href="/deleteCapstone/{{ capstone_project[0] }}">Delete</a>
                 {% endif %}
                 <a class="btn returnBtn" href="/queryCapstone">Return</a>
             </div>
