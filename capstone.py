@@ -69,7 +69,8 @@ def queryCapstone():
         return render_template('queryCapstone.html')
     
 @capstone_bp.route('/capstoneDetails/<int:cp_id>/<string:message>')
-def capstoneDetails(cp_id, message):
+@capstone_bp.route('/capstoneDetails/<int:cp_id>/')
+def capstoneDetails(cp_id, message=''):
     # Retrieve session variables
     account_type = session.get('account_type')
 
@@ -101,7 +102,7 @@ def modifyCapstone(cp_id):
     cp_roleOfContact = request.form.get('cp-roleOfContact')
 
     # Validation: Check if number of students is a valid integer or less than maximum
-    if not cp_noOfStudents.isdigit() or cp_noOfStudents > 6:
+    if not cp_noOfStudents.isdigit() or int(cp_noOfStudents) > 6:
         return capstoneDetails(cp_id, error='Invalid Number of Students')
 
     # Validation: Check if academic year is a valid year (4-digit number)
