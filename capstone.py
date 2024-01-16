@@ -44,34 +44,45 @@ def queryCapstone():
         if academic_year and (not academic_year.isdigit() or len(academic_year) != 4):
             return render_template('queryCapstone.html', error='Invalid Year Format')
 
-        # Connect to database
-        connection = get_database_connection()
-        cursor = connection.cursor()
-
-        #SQL Query base
-        query = "SELECT * FROM capstone_projects WHERE 1=1"
-
-        # Check if academic year and/or keyword are provided
-        if academic_year:
-            query += f" AND academic_year = '{academic_year}'"
-        if keyword:
-            query += f" AND capstone_title LIKE '%{keyword}%' OR project_description LIKE '%{keyword}%'"
-
-        # Add sorting by descending year
-        query += " ORDER BY academic_year DESC"
-
-        # Execute the SQL Query
-        cursor.execute(query)
-        capstone_projects = cursor.fetchall()
-
-        return render_template('queryResults.html', capstone_projects=capstone_projects)
+        return redirect(url_for('capstone.queryResults', academic_year=academic_year, keyword=keyword))
     else:
         return render_template('queryCapstone.html')
+    
+@capstone_bp.route('/queryResults')
+def queryResults():
+    academic_year = request.args.get('academic_year')
+    keyword = request.args.get('keyword')
+
+    # Connect to database
+    connection = get_database_connection()
+    cursor = connection.cursor()
+
+    #SQL Query base
+    query = "SELECT * FROM capstone_projects WHERE 1=1"
+
+    # Check if academic year and/or keyword are provided
+    if academic_year:
+        query += f" AND academic_year = '{academic_year}'"
+    if keyword:
+        query += f" AND capstone_title LIKE '%{keyword}%' OR project_description LIKE '%{keyword}%'"
+
+    # Add sorting by descending year
+    query += " ORDER BY academic_year DESC"
+
+    # Execute the SQL Query
+    cursor.execute(query)
+    capstone_projects = cursor.fetchall()
+
+    return render_template('queryResults.html', capstone_projects=capstone_projects, academic_year=academic_year, keyword=keyword)
     
 @capstone_bp.route('/capstoneDetails/<int:cp_id>')
 def capstoneDetails(cp_id, message=''):
     # Retrieve session variables
     account_type = session.get('account_type')
+
+    # Retrieve additional parameters from the URL
+    academic_year = request.args.get('academic_year')
+    keyword = request.args.get('keyword')
 
     # Connect to the database
     connection = get_database_connection()
@@ -83,9 +94,23 @@ def capstoneDetails(cp_id, message=''):
     capstone_project = cursor.fetchone()
 
     if account_type == "Normal User":
-        return render_template('capstoneDetails.html', capstone_project=capstone_project, account_type='Normal User', message=message)
+        return render_template(
+            'capstoneDetails.html', 
+            capstone_project=capstone_project, 
+            account_type='Normal User', 
+            message=message,
+            academic_year=academic_year,
+            keyword=keyword
+        )
     elif account_type == "Administrator":
-        return render_template('capstoneDetails.html', capstone_project=capstone_project, account_type='Administrator', message=message)
+        return render_template(
+            'capstoneDetails.html', 
+            capstone_project=capstone_project, 
+            account_type='Administrator', 
+            message=message,
+            academic_year=academic_year,
+            keyword=keyword
+        )
     
 @capstone_bp.route('/modifyCapstone/<int:cp_id>', methods=['POST'])
 def modifyCapstone(cp_id):
@@ -120,4 +145,22 @@ def modifyCapstone(cp_id):
     connection.commit()
 
     return capstoneDetails(cp_id, message='Successful Capstone Modification')
+
+@capstone_bp.route('/deleteCapstone/<int:cp_id>', methods=['POST'])
+def deleteCapstone(cp_id):
+    # Connect to database
+    connection = get_database_connection()
+    cursor = connection.cursor()
+
+    # Retrieve additional parameters from the URL
+    academic_year = request.args.get('academic_year')
+    keyword = request.args.get('keyword')
+
+    #SQL Query base
+    query = """DELETE FROM capstone_projects WHERE project_id=%s"""
+    
+    cursor.execute(query, (cp_id,))
+    connection.commit()
+
+    return redirect(url_for('capstone.queryResults', academic_year=academic_year, keyword=keyword))
     
