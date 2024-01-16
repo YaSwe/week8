@@ -68,7 +68,6 @@ def queryCapstone():
     else:
         return render_template('queryCapstone.html')
     
-@capstone_bp.route('/capstoneDetails/<int:cp_id>/<string:message>')
 @capstone_bp.route('/capstoneDetails/<int:cp_id>')
 def capstoneDetails(cp_id, message=''):
     # Retrieve session variables
@@ -103,11 +102,11 @@ def modifyCapstone(cp_id):
 
     # Validation: Check if number of students is a valid integer or less than maximum
     if not cp_noOfStudents.isdigit() or int(cp_noOfStudents) > 6:
-        return capstoneDetails(cp_id, error='Invalid Number of Students')
+        return capstoneDetails(cp_id, message='Invalid Number of Students')
 
     # Validation: Check if academic year is a valid year (4-digit number)
     if cp_academicYear and (not cp_academicYear.isdigit() or len(cp_academicYear) != 4):
-        return capstoneDetails(cp_id, error='Invalid Year Format')
+        return capstoneDetails(cp_id, message='Invalid Year Format')
 
     # Connect to database
     connection = get_database_connection()
