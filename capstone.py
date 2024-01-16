@@ -69,7 +69,7 @@ def queryCapstone():
         return render_template('queryCapstone.html')
     
 @capstone_bp.route('/capstoneDetails/<int:cp_id>/<string:message>')
-@capstone_bp.route('/capstoneDetails/<int:cp_id>/')
+@capstone_bp.route('/capstoneDetails/<int:cp_id>')
 def capstoneDetails(cp_id, message=''):
     # Retrieve session variables
     account_type = session.get('account_type')
