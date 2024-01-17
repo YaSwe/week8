@@ -74,6 +74,14 @@ jobs:
           Workflow name - `${{ github.workflow }}`
           Job -           `${{ github.job }}`
           status -        `${{ job.status }}`
+
+    - if: ${{ failure() }}
+      name: Discord notification on Failed workflow
+      env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+          args: 'One of the test cases in {{ EVENT_PAYLOAD.repository.full_name }} has failed.'
           
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
