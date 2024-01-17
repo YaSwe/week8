@@ -78,7 +78,7 @@ jobs:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
       with:
-        args: 'One of the test cases in {{ EVENT_PAYLOAD.repository.full_name }} has failed.'
+        args: 'One of the test cases in {{ EVENT_PAYLOAD.week8 }} has failed.'
           
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
@@ -112,4 +112,3 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         reviewers: YaSwe
-    
