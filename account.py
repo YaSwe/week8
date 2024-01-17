@@ -125,7 +125,7 @@ def modifyAccount(acc_id):
     cursor.execute(query, (acc_name, acc_pwd, acc_date, acc_type, acc_id))
     connection.commit()
 
-    return accountDetails(acc_id, message='Successful Account Modification')
+    
 
 
 
