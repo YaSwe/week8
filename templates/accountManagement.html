@@ -16,6 +16,7 @@
                 <th>Password</th>
                 <th>Role</th>
                 <th>Creation Date</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,16 +27,22 @@
                 <td>{{ acc[2] }}</td>
                 <td>{{ acc[4] }}</td>
                 <td>{{ acc[3].strftime('%m-%d-%Y') }}</td>
+                <td>{{ acc[5] }}</td>
                 <td>
                     <a class="editAccBtn" href="{{ url_for('account.accountDetails', acc_id=acc[0]) }}">Edit</a>
 
                     <form action="{{ url_for('account.deleteAccount', acc_id=acc[0]) }}" method="POST">
                         <input type="submit" class="deleteAccBtn" value="Delete">
                     </form>
-
+                    {% if acc[5] == 'Approved' %}
+                    <form action="{{ url_for('account.approveAccount', acc_id=acc[0]) }}" method="POST" style="visibility: hidden;">
+                        <input type="submit" class="approveAccBtn" value="Approve">
+                    </form>
+                    {% else %}
                     <form action="{{ url_for('account.approveAccount', acc_id=acc[0]) }}" method="POST">
                         <input type="submit" class="approveAccBtn" value="Approve">
                     </form>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

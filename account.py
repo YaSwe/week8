@@ -143,5 +143,16 @@ def deleteAccount(acc_id):
 
 @account_bp.route('/approveAccount/<int:acc_id>', methods=['POST'])
 def approveAccount(acc_id):
-    pass
+    # Connect to database
+    connection = get_database_connection()
+    cursor = connection.cursor()
+
+    #SQL Query base
+    query = """UPDATE accounts SET approval_status='Approved' WHERE account_id=%s"""
+
+    cursor.execute(query, (acc_id,))
+    connection.commit()
+
+    return accountManagement()
+
 
