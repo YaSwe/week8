@@ -7,7 +7,7 @@
     <div class="title">TSAO Capstone Records System</div>
 </div>
 <main class="content">
-    <form action="/login" method="POST">
+    <form class="form" action="/login" method="POST">
         <div class="form-container">
             <h2>Sign In</h2>
             <!-- Username Input -->
@@ -28,7 +28,7 @@
             </div>
 
             {% if error == 'Account not approved' %}
-            <div class="error-text">Account not approved. Please contact your administrator to approve.</div>
+            <div class="error-text">Account not approved.</div>
             {% endif %}
             
             {% if error == 'Invalid credentials' %}

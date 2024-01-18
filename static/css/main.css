@@ -59,9 +59,12 @@ main {
     min-height: 100vh;
 }
 
-/* Login & Registration form */
-
+/* Forms  */
 form {
+    display: inline;
+}
+
+.form {
     background: var(--light-grey);
     border-radius: 0.8rem;
     display: flex;
@@ -75,7 +78,7 @@ form {
     padding: 3rem;
 }
 
-form h2 {
+.form h2 {
     font-size: 20px;
     color: var(--cyan)
 }
@@ -309,15 +312,19 @@ textarea:focus {
     font-size: 14px;
 }
 
-.acc-table td a {
+.acc-table td a, 
+.acc-table td input {
     text-decoration: none;
     color: var(--dark-grey);
-    padding: 5px;
+    padding: 0 5px;
     font-weight: 600;
+    background: transparent;
 }
 
-.acc-table td a:hover {
+.acc-table td a:hover, 
+.acc-table td input:hover {
     color: var(--dark-blue);
+    cursor: pointer;
 }
 
 .acc-table tr {
