@@ -48,7 +48,7 @@ def queryCapstone():
     else:
         return render_template('queryCapstone.html')
     
-@capstone_bp.route('/queryResults')
+@capstone_bp.route('/queryResults', methods=['GET'])
 def queryResults():
     academic_year = request.args.get('academic_year')
     keyword = request.args.get('keyword')
@@ -75,7 +75,7 @@ def queryResults():
 
     return render_template('queryResults.html', capstone_projects=capstone_projects, academic_year=academic_year, keyword=keyword)
     
-@capstone_bp.route('/capstoneDetails/<int:cp_id>')
+@capstone_bp.route('/capstoneDetails/<int:cp_id>', methods=['GET'])
 def capstoneDetails(cp_id, message=''):
     # Retrieve session variables
     account_type = session.get('account_type')

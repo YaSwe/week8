@@ -66,7 +66,7 @@ def register():
     else:
         return render_template('register.html')
     
-@account_bp.route('/dashboard') 
+@account_bp.route('/dashboard', methods=['GET']) 
 def dashboard():
     account_type = session.get('account_type')
     account_name = session.get('account_username')
@@ -93,7 +93,7 @@ def accountManagement():
 
     return render_template('accountManagement.html', accounts=accounts)
 
-@account_bp.route('/accountDetails/<int:acc_id>')
+@account_bp.route('/accountDetails/<int:acc_id>', methods=['GET'])
 def accountDetails(acc_id, message=''):
     # Connect to the database
     connection = get_database_connection()
@@ -126,3 +126,22 @@ def modifyAccount(acc_id):
     connection.commit()
 
     return accountDetails(acc_id, message='Successful Account Modification')
+
+@account_bp.route('/deleteAccount/<int:acc_id>', methods=['POST'])
+def deleteAccount(acc_id):
+    # Connect to database
+    connection = get_database_connection()
+    cursor = connection.cursor()
+
+    #SQL Query base
+    query = """DELETE FROM accounts WHERE account_id=%s"""
+
+    cursor.execute(query, (acc_id,))
+    connection.commit()
+
+    return accountManagement()
+
+@account_bp.route('/approveAccount/<int:acc_id>', methods=['POST'])
+def approveAccount(acc_id):
+    pass
+
