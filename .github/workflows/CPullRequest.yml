@@ -121,10 +121,10 @@ jobs:
       uses: super-linter/super-linter@v5.7.2
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PYTHON_FLAKE8_CONFIG_FILE: .flake8
         OUTPUT_REPORT: linter_report
         OUTPUT_DETAILS: detailed
-        VALIDATE_GITHUB_ACTION: false
+        VALIDATE_GITHUB_ACTIONS: false
         VALIDATE_CSS: false
         VALIDATE_HTML: false
         VALIDATE_PYTHON_BLACK: false
+        VALIDATE_PYTHON_ISORT: false
