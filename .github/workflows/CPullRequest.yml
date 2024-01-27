@@ -111,11 +111,6 @@ jobs:
       uses: super-linter/super-linter@v5.7.2
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DEFAULT_BRANCH: main
-        VALIDATE_ALL_CODEBASE: false
-        VALIDATE_PYTHON_BLACK: false
-        VALIDATE_GITHUB_ACTIONS: false
-        PYTHON_FLAKE8_CONFIG_FILE: .flake8
 
   Requests_AddReviewer:
     name: Add Reviewers
