@@ -113,19 +113,19 @@ jobs:
         reviewers: YaSwe
 
   lint:
-  name: Lint Code Base
-  runs-on: ubuntu-latest
-  steps:
-  - uses: actions/checkout@v4
-  - name: Super Linter
-    uses: super-linter/super-linter@v5.7.2
-    env: 
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      PYTHON_FLAKE8_CONFIG_FILE: .flake8
-      OUTPUT_REPORT: linter_report
-      OUTPUT_DETAILS: detailed
-      VALIDATE_ALL_CODEBASE: false
-      VALIDATE_GITHUB_ACTION: false
-      VALIDATE_CSS: false
-      VALIDATE_HTML: false
-      VALIDATE_PYTHON_BLACK: false
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Super Linter
+      uses: super-linter/super-linter@v5.7.2
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PYTHON_FLAKE8_CONFIG_FILE: .flake8
+        OUTPUT_REPORT: linter_report
+        OUTPUT_DETAILS: detailed
+        VALIDATE_ALL_CODEBASE: false
+        VALIDATE_GITHUB_ACTION: false
+        VALIDATE_CSS: false
+        VALIDATE_HTML: false
+        VALIDATE_PYTHON_BLACK: false
