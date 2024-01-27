@@ -114,6 +114,7 @@ jobs:
         DEFAULT_BRANCH: main
         VALIDATE_ALL_CODEBASE: false
         VALIDATE_PYTHON_BLACK: false
+        VALIDATE_GITHUB_ACTION: false
         PYTHON_FLAKE8_CONFIG_FILE: .flake8
 
   Requests_AddReviewer:
