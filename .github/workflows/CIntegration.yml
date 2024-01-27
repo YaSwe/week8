@@ -25,7 +25,6 @@ jobs:
         pip install flask
         pip install mysql-connector-python
         pip install python-dotenv
-        pip install flake8
         
     - name: Checkout Development Code
       uses: actions/checkout@v4
@@ -88,7 +87,7 @@ jobs:
       run: |
         mkdir downloads
         mv report.xml ./downloads
-        
+
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with: 
