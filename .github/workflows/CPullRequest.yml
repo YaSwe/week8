@@ -102,21 +102,6 @@ jobs:
       with:
         name: testResults
 
-  lint:
-    name: Lint Code Base
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Super Linter
-      uses: super-linter/super-linter@v5.7.2
-      env: 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DEFAULT_BRANCH: main
-        VALIDATE_ALL_CODEBASE: false
-        VALIDATE_PYTHON_BLACK: false
-        VALIDATE_GITHUB_ACTIONS: false
-        PYTHON_FLAKE8_CONFIG_FILE: .flake8
-
   Requests_AddReviewer:
     name: Add Reviewers
     needs: Requests_Build
@@ -127,3 +112,22 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         reviewers: YaSwe
+
+   lint:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Super Linter
+      uses: super-linter/super-linter@v5.7.2
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BRANCH: main
+        PYTHON_FLAKE8_CONFIG_FILE: .flake8
+        OUTPUT_REPORT: linter_report
+        OUTPUT_DETAILS: detailed
+        VALIDATE_ALL_CODEBASE: false
+        VALIDATE_GITHUB_ACTION: false
+        VALIDATE_CSS: false
+        VALIDATE_HTML: false
+        VALIDATE_PYTHON_BLACK: false

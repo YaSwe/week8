@@ -1,12 +1,14 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session
 from database import get_database_connection
 from datetime import datetime
 
 account_bp = Blueprint('account', __name__)
 
+
 @account_bp.route('/')
 def index():
     return render_template('index.html')
+
 
 @account_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -19,7 +21,7 @@ def login():
         connection = get_database_connection()
         cursor = connection.cursor()
 
-        #SQL Query to check login credentials 
+        # SQL Query to check login credentials
         query = "SELECT * FROM accounts WHERE username = %s AND password = %s"
         cursor.execute(query, (username, password))
         account = cursor.fetchone()
@@ -31,7 +33,7 @@ def login():
                 # Save account_id in session storage
                 session['account_username'] = account[1]
                 session['account_type'] = account[4]
-                
+
                 if account[4] == 'Normal User':
                     return render_template('dashboard.html', accountName=account[1], account_type='Normal User')
                 elif account[4] == 'Administrator':
@@ -40,11 +42,12 @@ def login():
                 # If account is not approved, display error
                 return render_template('login.html', error='Account not approved')
         else:
-            # Else return back to login 
+            # Else return back to login
             return render_template('login.html', error='Invalid credentials')
     else:
         return render_template('login.html')
-    
+
+
 @account_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
@@ -65,8 +68,9 @@ def register():
         return render_template('register.html', message='Successful registration')
     else:
         return render_template('register.html')
-    
-@account_bp.route('/dashboard', methods=['GET']) 
+
+
+@account_bp.route('/dashboard', methods=['GET'])
 def dashboard():
     account_type = session.get('account_type')
     account_name = session.get('account_username')
@@ -77,14 +81,15 @@ def dashboard():
         return render_template('dashboard.html', accountName=account_name, account_type='Administrator')
     else:
         return render_template('login.html')
-    
+
+
 @account_bp.route('/accountManagement', methods=['GET'])
 def accountManagement():
     # Connect to database
     connection = get_database_connection()
     cursor = connection.cursor()
 
-    #SQL Query base
+    # SQL Query base
     query = "SELECT * FROM accounts"
 
     # Execute the SQL Query
@@ -92,6 +97,7 @@ def accountManagement():
     accounts = cursor.fetchall()
 
     return render_template('accountManagement.html', accounts=accounts)
+
 
 @account_bp.route('/accountDetails/<int:acc_id>', methods=['GET'])
 def accountDetails(acc_id, message=''):
@@ -106,6 +112,7 @@ def accountDetails(acc_id, message=''):
 
     return render_template('accountDetails.html', account=account, message=message)
 
+
 @account_bp.route('/modifyAccount/<int:acc_id>', methods=['POST'])
 def modifyAccount(acc_id):
     acc_name = request.form['acc-name']
@@ -119,13 +126,14 @@ def modifyAccount(acc_id):
     connection = get_database_connection()
     cursor = connection.cursor()
 
-    #SQL Query base
+    # SQL Query base
     query = """UPDATE accounts SET username=%s, password=%s, creation_date=%s, account_type=%s WHERE account_id=%s"""
-    
+
     cursor.execute(query, (acc_name, acc_pwd, acc_date, acc_type, acc_id))
     connection.commit()
 
     return accountDetails(acc_id, message='Successful Account Modification')
+
 
 @account_bp.route('/deleteAccount/<int:acc_id>', methods=['POST'])
 def deleteAccount(acc_id):
@@ -133,7 +141,7 @@ def deleteAccount(acc_id):
     connection = get_database_connection()
     cursor = connection.cursor()
 
-    #SQL Query base
+    # SQL Query base
     query = """DELETE FROM accounts WHERE account_id=%s"""
 
     cursor.execute(query, (acc_id,))
@@ -141,18 +149,17 @@ def deleteAccount(acc_id):
 
     return accountManagement()
 
+
 @account_bp.route('/approveAccount/<int:acc_id>', methods=['POST'])
 def approveAccount(acc_id):
     # Connect to database
     connection = get_database_connection()
     cursor = connection.cursor()
 
-    #SQL Query base
+    # SQL Query base
     query = """UPDATE accounts SET approval_status='Approved' WHERE account_id=%s"""
 
     cursor.execute(query, (acc_id,))
     connection.commit()
 
     return accountManagement()
-
-
