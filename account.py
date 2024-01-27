@@ -60,7 +60,7 @@ def register():
         cursor = connection.cursor()
 
         # SQL Query to check login credentials and status
-        query = """INSERT INTO accounts (username, password, creation_date, account_type, approval_status) 
+        query = """INSERT INTO accounts (username, password, creation_date, account_type, approval_status)
             VALUES (%s, %s, %s, 'Normal User', 'Pending')"""
         # Get current datetime
         current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
