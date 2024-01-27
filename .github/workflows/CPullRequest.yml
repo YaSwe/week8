@@ -107,13 +107,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-      with: 
-        fetch-depth: 0
-    - name : Super Linter
+    - name: Super Linter
       uses: super-linter/super-linter@v5.7.2
       env: 
-        VALIDATE_ALL_CODEBASE: false
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BRANCH: main
+        VALIDATE_ALL_CODEBASE: false
+        VALIDATE_PYTHON_BLACK: false
+        VALIDATE_GITHUB_ACTIONS: false
+        PYTHON_FLAKE8_CONFIG_FILE: .flake8
 
   Requests_AddReviewer:
     name: Add Reviewers
