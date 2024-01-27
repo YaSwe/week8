@@ -100,10 +100,13 @@ jobs:
         name: testResults
         
   lint:
+    name: Lint Code Base
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name : Super Linter
       uses: super-linter/super-linter@v5.7.2
       env: 
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: master
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
