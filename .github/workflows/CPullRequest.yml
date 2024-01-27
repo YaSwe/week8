@@ -124,7 +124,6 @@ jobs:
         PYTHON_FLAKE8_CONFIG_FILE: .flake8
         OUTPUT_REPORT: linter_report
         OUTPUT_DETAILS: detailed
-        VALIDATE_ALL_CODEBASE: false
         VALIDATE_GITHUB_ACTION: false
         VALIDATE_CSS: false
         VALIDATE_HTML: false
